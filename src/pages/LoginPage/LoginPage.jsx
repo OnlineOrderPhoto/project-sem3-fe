@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../../components/Input/Input";
 import loginSchema from "../../schemas/loginSchema";
+import { useNavigate } from "react-router-dom";
+import { path } from "../../constants/path";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -22,6 +25,7 @@ const LoginPage = () => {
   const handleLogin = handleSubmit((data) => {
     loginMutation.mutate(data, {
       onSuccess: () => {
+        navigate(path.homepage);
         console.log("Đăng nhập thành công");
       },
     });
