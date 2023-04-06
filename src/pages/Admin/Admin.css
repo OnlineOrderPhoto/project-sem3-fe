@@ -1,0 +1,33 @@
+.admin-main {
+  background: white;
+  height: 150vh;
+  display: flex;
+}
+
+.admin-nav-bar {
+  width: 20vw;
+  height: 150vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.admin-nav-bar-button-main {
+  width: 80%;
+}
+
+.admin-nav-bar-button {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.btn-outline-secondary {
+  width: 100%;
+  margin: 1vw 0;
+}
+
+.admin-content {
+  width: 80vw;
+  height: 100%;
+}

@@ -23,7 +23,7 @@ const MainNavbar = () => {
         to="/"
         className="navbar-brand"
       >
-        Navbar
+        PhotoFun
       </Link>
       <button
         className="navbar-toggler"
@@ -46,54 +46,10 @@ const MainNavbar = () => {
               to="/"
               className="nav-link"
             >
-              Home <span className="sr-only">(current)</span>
+              Product
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              to="/"
-              className="nav-link"
-            >
-              Link
-            </Link>
-          </li>
-          <li className="nav-item dropdown">
-            <Link
-              to="/"
-              className="nav-link dropdown-toggle"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </Link>
-            <div
-              className="dropdown-menu"
-              aria-labelledby="navbarDropdown"
-            >
-              <Link
-                to="/"
-                className="dropdown-item"
-              >
-                Action
-              </Link>
-              <Link
-                to="/"
-                className="dropdown-item"
-              >
-                Another action
-              </Link>
-              <div className="dropdown-divider" />
-              <Link
-                to="/"
-                className="dropdown-item"
-              >
-                Something else here
-              </Link>
-            </div>
-          </li>
+
           <li className="nav-item">
             <Link
               to={path.login}
