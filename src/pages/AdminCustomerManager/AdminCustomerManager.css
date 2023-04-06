@@ -1,0 +1,15 @@
+.customer-manager-main {
+  padding: 1.5vw;
+}
+
+.cus-son {
+  width: 100%;
+}
+
+.cus-son-title {
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vw;
+}
