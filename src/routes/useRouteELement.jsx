@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import Homepage from "../pages/Homepage/Homepage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import { Admin } from "../pages/Admin/Admin";
 import { AdminCustomerManager } from "../pages/AdminCustomerManager/AdminCustomerManager";
 import { AdminOrderManager } from "../pages/AdminOrderManager/AdminOrderManager";
@@ -26,6 +27,14 @@ export default function useRouteElement() {
       element: (
         <MainLayout>
           <LoginPage></LoginPage>
+        </MainLayout>
+      ),
+    },
+    {
+      path: path.cart,
+      element: (
+        <MainLayout>
+          <ShoppingCart></ShoppingCart>
         </MainLayout>
       ),
     },
