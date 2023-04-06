@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, Outlet, useRoutes } from "react-router-dom";
 import { path } from "../constants/path";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import LoginPage from "../pages/LoginPage/LoginPage";
@@ -10,6 +10,18 @@ import { AdminCustomerManager } from "../pages/AdminCustomerManager/AdminCustome
 import { AdminOrderManager } from "../pages/AdminOrderManager/AdminOrderManager";
 import { AdminSizeManager } from "../pages/AdminSizeManager/AdminSizeManager";
 import { AdminTypeManager } from "../pages/AdminTypeManager/AdminTypeManager";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth.context";
+
+function ProtectedRoutes() {
+  const { isAuthenticated } = useContext(AuthContext);
+  return isAuthenticated ? <Outlet></Outlet> : <Navigate to={path.login}></Navigate>;
+}
+
+function RejectedRoutes() {
+  const { isAuthenticated } = useContext(AuthContext);
+  return !isAuthenticated ? <Outlet></Outlet> : <Navigate to={path.homepage}></Navigate>;
+}
 
 export default function useRouteElement() {
   const routes = useRoutes([
