@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import authApi from "../../apis/auth.api";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,8 +7,10 @@ import Input from "../../components/Input/Input";
 import loginSchema from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { path } from "../../constants/path";
+import { AuthContext } from "../../contexts/auth.context";
 
 const LoginPage = () => {
+  const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -26,6 +28,7 @@ const LoginPage = () => {
     loginMutation.mutate(data, {
       onSuccess: () => {
         navigate(path.homepage);
+        setIsAuthenticated(true);
         console.log("Đăng nhập thành công");
       },
     });
