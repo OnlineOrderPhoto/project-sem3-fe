@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
-import { set } from "immutable";
 
 export const AdminCustomerManager = () => {
   const [data, setData] = useState([]);
@@ -28,20 +27,19 @@ export const AdminCustomerManager = () => {
   };
 
   const handleUpdateUserData = async () => {
-    console.log(fullname);
-    console.log(email);
-    console.log(phoneNumber);
-    console.log(gender);
-
-    const res = await http.put("/User/update?userId=" + userId, {
-      name: fullname,
-      gender: gender,
-      email: email,
-      phoneNumber: phoneNumber,
-    });
-    console.log(res);
-    setShow(false);
-    location.reload();
+    if (fullname !== "" || gender !== "" || email !== "" || phoneNumber !== "") {
+      const res = await http.put("/User/update?userId=" + userId, {
+        name: fullname,
+        gender: gender,
+        email: email,
+        phoneNumber: phoneNumber,
+      });
+      console.log(res);
+      setShow(false);
+      location.reload();
+    } else {
+      alert("Vui lòng điền đầy đủ thông tin");
+    }
   };
 
   useEffect(() => {
