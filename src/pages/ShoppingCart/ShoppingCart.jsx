@@ -5,7 +5,7 @@ const ShoppingCart = () => {
   const [orderDetails, setOrderDetail] = useState([]);
   useEffect(() => {
     const getOrderDetail = async () => {
-      const res = await http.get("/OrderDetails");
+      const res = await http.get("/ShoppingCards");
       setOrderDetail(res.data);
     };
     getOrderDetail();
@@ -17,8 +17,8 @@ const ShoppingCart = () => {
           <tr>
             <td>ID</td>
             <td>Picture Name</td>
-            <td>sizeId</td>
-            <td>typeId</td>
+            <td>Size</td>
+            <td>Type</td>
             <td>quantity</td>
             <td>price</td>
           </tr>
@@ -28,8 +28,8 @@ const ShoppingCart = () => {
             <tr key={orderDetail.orderDetailId}>
               <td>{orderDetail.orderDetailId}</td>
               <td>{orderDetail.pictureName}</td>
-              <td>{orderDetail.sizeId}</td>
-              <td>{orderDetail.typeId}</td>
+              <td>{orderDetail.size}</td>
+              <td>{orderDetail.type}</td>
               <td>{orderDetail.quantity}</td>
               <td>{orderDetail.price}</td>
             </tr>

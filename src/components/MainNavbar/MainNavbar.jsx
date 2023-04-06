@@ -49,7 +49,14 @@ const MainNavbar = () => {
               Product
             </Link>
           </li>
-
+          <li>
+            <Link
+              to={path.cart}
+              className="nav-link"
+            >
+              Shopping Cart
+            </Link>
+          </li>
           <li className="nav-item">
             <Link
               to={path.login}
