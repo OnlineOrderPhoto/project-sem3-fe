@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import http from "../../utils/http";
+import "./HomePage.scss";
 import { Form, Button, Image } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -34,7 +35,7 @@ const Homepage = () => {
     });
     const dataRes = res.data;
     console.log(dataRes);
-    return res.data.data.url;
+    return dataRes;
   };
   const changeQuantity = (type) => {
     if (type != "cong" && value.quantity == 1) return;
@@ -69,114 +70,119 @@ const Homepage = () => {
 
     getSize();
     getType();
-  
+
     console.log(type);
   }, []);
   return (
-    <Form
-      onSubmit={handleSubmit}
-      noValidate
-    >
-      {selectedImage && (
-        <div>
-          <Image
-            variant="top"
-            alt="not found"
-            style={{ width: "18rem" }}
-            src={URL.createObjectURL(selectedImage)}
-          />
-          <br />
-          <Button onClick={() => setSelectedImage(null)}>Remove</Button>
-        </div>
-      )}
-      <Form.Group
-        controlId="formFile"
-        className="mb-3"
+    <div className="root-container">
+      <Form
+        className="form-root"
+        // onSubmit={handleSubmit}
+        noValidate
       >
-        <Form.Label>Your Image</Form.Label>
-        <Form.Control
-          type="file"
-          onChange={(event) => {
-            console.log(event.target.files[0].name);
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Size</Form.Label>
-        <Form.Select
-          onChange={(e) => {
-            changeValue({
-              price: e.target.value * 1,
-              size: e.target.options[e.target.selectedIndex].dataset.size,
-            });
-          }}
-          defaultValue={value.price}
-        >
-          <option value={0}>Pic Size Image</option>
-          {data.map((item) => (
-            <option
-              key={item.sizeId}
-              value={item.sizePrice}
-              data-size={item.picSize}
-            >
-              {item.picSize}
-            </option>
-          ))}
-        </Form.Select>
-      </Form.Group>
-      <Form.Group>
-        <Button
-          variant="outline-danger"
-          onClick={() => changeQuantity("tru")}
-        >
-          <i className="bi bi-dash"></i>
-        </Button>
-        <Button variant="outline-dark">{value.quantity}</Button>
-        <Button
-          variant="outline-primary"
-          onClick={() => changeQuantity("cong")}
-        >
-          <i className="bi bi-plus"></i>
-        </Button>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Type</Form.Label>
-        {type.map((item) => (
-          <div key={item.typeId}>
-            <input
-              type="radio"
-              id={`pickType${item.typeId}`}
-              name="TypeName"
-              value={item.typeName}
-              onChange={(e) => setTypePicker(e.target.value)}
+        <div className="image-container">
+          <Form.Group
+            controlId="formFile"
+            className="mb-3"
+          >
+            <Form.Label className="text">Your Image</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={(event) => {
+                console.log(event.target.files[0].name);
+                setSelectedImage(event.target.files[0]);
+              }}
             />
-            <label htmlFor={`pickType${item.typeId}`}>{item.typeName}</label>
-          </div>
-        ))}
-      </Form.Group>
-      <Form.Group
-        as={Row}
-        className="mb-3"
-        controlId="formPlaintextEmail"
-      >
-        <Form.Label
-          column
-          sm="2"
-        >
-          Total Price
-        </Form.Label>
-        <Col sm="10">
-          <Form.Control
-            plaintext
-            readOnly
-            value={value.total}
-          />
-        </Col>
-      </Form.Group>
-      {/* <Button type="submit">Add</Button> */}
-      <Button onClick={handleSubmit}>Add</Button>
-    </Form>
+          </Form.Group>
+          {selectedImage && (
+            <div>
+              <Image
+                variant="top"
+                alt="not found"
+                style={{ width: "18rem", border: "1px solid black", boxShadow: "0px 5px 10px 0px" }}
+                src={URL.createObjectURL(selectedImage)}
+              />
+              <br />
+              <Button onClick={() => setSelectedImage(null)}>Remove</Button>
+            </div>
+          )}
+        </div>
+        <div className="pickup-container">
+          <Form.Group className="item">
+            <Form.Label className="text">Size</Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                changeValue({
+                  price: e.target.value * 1,
+                  size: e.target.options[e.target.selectedIndex].dataset.size,
+                });
+              }}
+              defaultValue={value.price}
+            >
+              <option value={0}>Pic Size Image</option>
+              {data.map((item) => (
+                <option
+                  key={item.sizeId}
+                  value={item.sizePrice}
+                  data-size={item.picSize}
+                >
+                  {item.picSize}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="item">
+            <Form.Label className="text">Quantity </Form.Label>
+            <Button
+              variant="outline-danger"
+              onClick={() => changeQuantity("tru")}
+            >
+              <i className="bi bi-dash icon"></i>
+            </Button>
+            <div className="quantity-value">{value.quantity}</div>
+            <Button
+              variant="outline-primary"
+              onClick={() => changeQuantity("cong")}
+            >
+              <i className="bi bi-plus icon"></i>
+            </Button>
+          </Form.Group>
+          <Form.Group className="item">
+            <Form.Label className="text">Type</Form.Label>
+            {type.map((item) => (
+              <div
+                key={item.typeId}
+                className="quantity-value"
+              >
+                <input
+                  type="radio"
+                  id={`pickType${item.typeId}`}
+                  name="TypeName"
+                  value={item.typeName}
+                  onChange={(e) => setTypePicker(e.target.value)}
+                />
+                <label
+                  htmlFor={`pickType${item.typeId}`}
+                  className="quantity-value text-label"
+                >
+                  {item.typeName}
+                </label>
+              </div>
+            ))}
+          </Form.Group>
+          <Form.Group className="form-label text form-total">
+            <Form.Label className=" total-price">Total Price</Form.Label>
+            <Form.Control
+              plaintext
+              readOnly
+              value={value.total}
+            />
+          </Form.Group>
+          <Button onClick={handleSubmit}>Add to Shopping Cart</Button>
+        </div>
+        {/* <Button type="submit">Add</Button> */}
+      </Form>
+    </div>
   );
 };
 export default Homepage;
