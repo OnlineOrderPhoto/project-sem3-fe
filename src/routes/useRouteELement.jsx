@@ -36,11 +36,7 @@ export default function useRouteElement() {
     },
     {
       path: path.login,
-      element: (
-        <MainLayout>
-          <LoginPage></LoginPage>
-        </MainLayout>
-      ),
+      element: <LoginPage></LoginPage>,
     },
     {
       path: path.cart,
@@ -52,11 +48,7 @@ export default function useRouteElement() {
     },
     {
       path: path.register,
-      element: (
-        <MainLayout>
-          <RegisterPage></RegisterPage>
-        </MainLayout>
-      ),
+      element: <RegisterPage></RegisterPage>,
     },
     {
       path: path.admin,
