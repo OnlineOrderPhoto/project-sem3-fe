@@ -1,3 +1,16 @@
 .container-table{
     background-color: aliceblue;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.btn-submit{
+    position: absolute;
+    right: 0;
+    transform: translateY(50%);
+    padding-top: 2rem;
+}
+.item-shopping-cart{
+
+    height: 2rem;
 }

@@ -24,8 +24,8 @@ const ShoppingCart = () => {
     console.log(data);
   }
   return (
-    <div>
-      <table className="table container-table">
+    <div className="container-table">
+      <table className="table ">
         <thead>
           <tr>
             <td>Picture Name</td>
@@ -38,7 +38,10 @@ const ShoppingCart = () => {
         </thead>
         <tbody>
           {orderDetails.map((orderDetail, index) => (
-            <tr key={index}>
+            <tr
+              className="item-shopping-cart"
+              key={index}
+            >
               <td>{orderDetail.pictureName}</td>
               <td>{orderDetail.size}</td>
               <td>{orderDetail.type}</td>
@@ -54,8 +57,12 @@ const ShoppingCart = () => {
             </tr>
           ))}
         </tbody>
-        <br />
-        <Button onClick={handleSubmit}>submit</Button>
+        <Button
+          className="btn-submit"
+          onClick={handleSubmit}
+        >
+          submit
+        </Button>
       </table>
     </div>
   );

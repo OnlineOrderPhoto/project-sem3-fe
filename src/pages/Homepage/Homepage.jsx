@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import http from "../../utils/http";
 import "./HomePage.scss";
-import { Form, Button, Image } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Form, Button, Image, Modal } from "react-bootstrap";
 const Homepage = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [selectedImage, setSelectedImage] = useState(null);
   const [data, setData] = useState([]);
   const [type, setType] = useState([]);
@@ -34,6 +35,7 @@ const Homepage = () => {
       },
     });
     const dataRes = res.data;
+    dataRes != null ? handleShow() : null;
     console.log(dataRes);
     return dataRes;
   };
@@ -74,7 +76,24 @@ const Homepage = () => {
     console.log(type);
   }, []);
   return (
-    <div className="root-container">
+    <div className="root-container-homepage">
+      <Modal
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Add to Shopping Cart success</Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Form
         className="form-root"
         // onSubmit={handleSubmit}
