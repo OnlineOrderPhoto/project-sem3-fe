@@ -36,8 +36,8 @@ export const AdminOrderManager = () => {
                   <th>{item.orderDetailId}</th>
                   <th>{item.pictureName}</th>
                   <th>{item.quantity}</th>
-                  <th>{item.sizeId}</th>
-                  <th>{item.typeId}</th>
+                  <th>{item.size}</th>
+                  <th>{item.type}</th>
                   <th>{item.price}</th>
                 </tr>
               ))}
