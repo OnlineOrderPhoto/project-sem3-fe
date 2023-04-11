@@ -52,8 +52,7 @@ const ShoppingCart = () => {
       <table className="table ">
         <thead>
           <tr>
-            {/* <td>Image</td> */}
-            <td>Picture Name</td>
+            <td>Image</td> 
             <td>Size</td>
             <td>Type</td>
             <td>quantity</td>
@@ -67,13 +66,13 @@ const ShoppingCart = () => {
               className="item-shopping-cart"
               key={index}
             >
-              {/* <td>
+              <td>
                 <img
-                  src="https://localhost:7107/images/" + {orderDetail.pictureName}
+                  src={"https://localhost:7107/images/" + orderDetail.pictureName}
                   alt=""
+                  style={{ width: "75px", height: "75px" }}
                 />
-              </td> */}
-              <td>{orderDetail.pictureName}</td>
+              </td>         
               <td>{orderDetail.size}</td>
               <td>{orderDetail.type}</td>
               <td>{orderDetail.quantity}</td>
