@@ -1,6 +1,7 @@
 import axios from "axios";
 import { clearAuthenInfoFromLS, getAccessTokenFromLS, saveAccessTokenToLS, saveProfileToLS } from "./auth";
 import { httpStatusCode } from "../constants/httpStatusCode";
+import jwtDecode from "jwt-decode";
 
 class Http {
   constructor() {
@@ -30,8 +31,10 @@ class Http {
         if (url === "/Auth/login" || url === "/Auth/register") {
           this.accessToken = response.data.data.accessToken;
           this.userProfile = response.data.data.userDto;
+          const token = this.accessToken;
+          const decoded = jwtDecode(token);
           saveAccessTokenToLS(this.accessToken);
-          saveProfileToLS(this.userProfile);
+          saveProfileToLS({ ...this.userProfile, role: decoded.role });
         } else if (url === "/Auth/logout") {
           this.accessToken = "";
           clearAuthenInfoFromLS();
