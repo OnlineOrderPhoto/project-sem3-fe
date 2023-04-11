@@ -23,6 +23,11 @@ function RejectedRoutes() {
   return !isAuthenticated ? <Outlet></Outlet> : <Navigate to={path.homepage}></Navigate>;
 }
 
+function AdminRoutes() {
+  const { userProfile, isAuthenticated } = useContext(AuthContext);
+  return isAuthenticated && userProfile.role === "admin" ? <Outlet></Outlet> : <Navigate to={path.homepage}></Navigate>;
+}
+
 export default function useRouteElement() {
   const routes = useRoutes([
     {
@@ -51,54 +56,60 @@ export default function useRouteElement() {
       element: <RegisterPage></RegisterPage>,
     },
     {
-      path: path.admin,
-      element: (
-        <MainLayout>
-          <Admin>
-            <AdminCustomerManager></AdminCustomerManager>
-          </Admin>
-        </MainLayout>
-      ),
-    },
-    {
-      path: path.adminCustomerManager,
-      element: (
-        <MainLayout>
-          <Admin>
-            <AdminCustomerManager></AdminCustomerManager>
-          </Admin>
-        </MainLayout>
-      ),
-    },
-    {
-      path: path.adminOrderManager,
-      element: (
-        <MainLayout>
-          <Admin>
-            <AdminOrderManager></AdminOrderManager>
-          </Admin>
-        </MainLayout>
-      ),
-    },
-    {
-      path: path.adminTypeManager,
-      element: (
-        <MainLayout>
-          <Admin>
-            <AdminTypeManager></AdminTypeManager>
-          </Admin>
-        </MainLayout>
-      ),
-    },
-    {
-      path: path.adminSizeManager,
-      element: (
-        <MainLayout>
-          <Admin>
-            <AdminSizeManager></AdminSizeManager>
-          </Admin>
-        </MainLayout>
-      ),
+      path: "",
+      element: <AdminRoutes></AdminRoutes>,
+      children: [
+        {
+          path: path.admin,
+          element: (
+            <MainLayout>
+              <Admin>
+                <AdminCustomerManager></AdminCustomerManager>
+              </Admin>
+            </MainLayout>
+          ),
+        },
+        {
+          path: path.adminCustomerManager,
+          element: (
+            <MainLayout>
+              <Admin>
+                <AdminCustomerManager></AdminCustomerManager>
+              </Admin>
+            </MainLayout>
+          ),
+        },
+        {
+          path: path.adminOrderManager,
+          element: (
+            <MainLayout>
+              <Admin>
+                <AdminOrderManager></AdminOrderManager>
+              </Admin>
+            </MainLayout>
+          ),
+        },
+        {
+          path: path.adminTypeManager,
+          element: (
+            <MainLayout>
+              <Admin>
+                <AdminTypeManager></AdminTypeManager>
+              </Admin>
+            </MainLayout>
+          ),
+        },
+        {
+          path: path.adminSizeManager,
+          element: (
+            <MainLayout>
+              <Admin>
+                <AdminSizeManager></AdminSizeManager>
+              </Admin>
+            </MainLayout>
+          ),
+        },
+      ],
     },
   ]);
   return routes;
