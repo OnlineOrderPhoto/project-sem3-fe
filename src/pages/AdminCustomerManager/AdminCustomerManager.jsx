@@ -13,10 +13,12 @@ export const AdminCustomerManager = () => {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [userAddress, setUserAddress] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = async ({ id }) => {
+    console.log(data);
     setShow(true);
     setUserId(id);
     const res = await http.get("/User?userId=" + id);
@@ -24,15 +26,17 @@ export const AdminCustomerManager = () => {
     setEmail(res.data.data.email);
     setPhoneNumber(res.data.data.phoneNumber);
     setGender(res.data.data.gender);
+    setUserAddress(res.data.data.addressUser);
   };
 
   const handleUpdateUserData = async () => {
-    if (fullname !== "" || gender !== "" || email !== "" || phoneNumber !== "") {
+    if (fullname !== "" || gender !== "" || email !== "" || phoneNumber !== "" || userAddress !== null) {
       const res = await http.put("/User/update?userId=" + userId, {
         name: fullname,
         gender: gender,
         email: email,
         phoneNumber: phoneNumber,
+        address: userAddress,
       });
       console.log(res);
       setShow(false);
@@ -63,6 +67,7 @@ export const AdminCustomerManager = () => {
                 <th scope="col">Name</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Email</th>
+                <th scope="col">Address</th>
                 <th scope="col">Phone number</th>
                 <th scope="col">#</th>
               </tr>
@@ -74,6 +79,7 @@ export const AdminCustomerManager = () => {
                   <th>{item.fulllname}</th>
                   <th>{item.gender == 0 ? <p>Female</p> : <p>Male</p>}</th>
                   <th>{item.email}</th>
+                  <th>{item.addressUser}</th>
                   <th>{item.phoneNumber}</th>
                   <th>
                     <Link
@@ -131,6 +137,18 @@ export const AdminCustomerManager = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   type="number"
                   placeholder="Enter Phone number"
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="formBasicEmail"
+              >
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  value={userAddress}
+                  onChange={(e) => setUserAddress(e.target.value)}
+                  type="text"
+                  placeholder="Enter Address"
                 />
               </Form.Group>
               <Form.Group
